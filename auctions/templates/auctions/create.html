@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create Listing</h2>
+    <form action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ createform.as_p }}
+        <input type="submit" value="Create Listing">
+    </form>
+  
+    
+
+
+
+    <!--
+    <form enctype="multipart/form-data" action="/create" method="post">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="description" placeholder="Description">
+        <input type="number" step=".01" min="0" maxlength="9" name="startingbid" placeholder="Starting Bid">
+        <input type="file" name="image">
+        <select name="categories">
+            <option disabled selected>"--Pick a Category If You'd Like--"</option>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+          </select>
+        <input type="submit" value="Create Listing">
+    </form>
+    -->
+{% endblock %}

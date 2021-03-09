@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Categories</h2>
+    <ul style="list-style-type:none;">
+        <a href="{% url 'beauty' %}"><li class="Cats">Beauty</li></a>
+        <a href="{% url 'clothing' %}"><li class="Cats">Clothing</li></a>
+        <a href="{% url 'education' %}"><li class="Cats">Education</li></a>
+        <a href="{% url 'electronics' %}"><li class="Cats">Electronics</li></a>
+        <a href="{% url 'furniture' %}"><li class="Cats">Furniture</li></a>
+        <a href="{% url 'home' %}"><li class="Cats" >Home</li></a>
+        <a href="{% url 'sports' %}"><li class="Cats">Sports</li></a>
+        <a href="{% url 'toys' %}"><li class="Cats">Toys</li></a>
+    </ul>
+
+{% endblock %}

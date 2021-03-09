@@ -1,0 +1,80 @@
+{% extends "auctions/layout.html" %}
+{% load widget_tweaks %}
+{% block body %}
+    <h2>{{ title }} </h2>
+    {% if user.is_authenticated %}
+        {% if remove == True %}
+            <form  method="POST">
+                {% csrf_token %}
+                {{ WatchListForm.as_p}}
+                <input class="watchlist" type="submit" value="Remove From Watch List" name='removefromwatchlist'>
+            </form>
+
+        {% else %}
+            <form  method="POST">
+                {% csrf_token %}
+                {{ WatchListForm.as_p}}
+                <input class="watchlist" type="submit" value="Add To Watch List" name='addtowatchlist'>
+            </form>
+        {% endif %}
+    {% endif %}
+    {% if user.is_authenticated and active == True and creator == request.user %}
+        <form  method="POST">
+            {% csrf_token %}
+            {{ IsActiveForm.as_p}}
+            <input type="submit" value="Close Listing" name="changeactive">
+        </form>
+    {% endif %}
+    <div class="flex-container">
+    <div class="flex-child image">
+        <h5 style="margin-top: 10px;">Current Bid: ${{ bid }}</h5>
+    
+    {% if active == True %}
+        <p>Currently {{ bidnumber }} bid(s) on this product. {{ you }}</p>
+    {% else %}
+        <p>{{ you }}</p>
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+        <form  method="POST">
+            {% csrf_token %}
+            {% render_field bidform.bid min=overbid %}
+            <input type="submit" value="Place Bid" name="addbid">
+        </form>
+    {% endif %}
+    <h5 style="margin-top: 10px;">Details</h5>
+    <ul>
+        <li>Listed by: {{ creator }}</li>
+        <li>Category: {{ category }}</li>
+        <li>Description: {{ description }}</li>
+    </ul>
+    </div>
+    <div class="flex-child image">
+        {% if image %}
+        <img src="{{ image.url }}" width="450">
+        {% endif %}
+    </div>
+    </div>
+    {% if user.is_authenticated %}
+        <form method="POST" style="padding-top: 20px;">
+            {% csrf_token %}
+            {{ commentform.as_p }}
+        <input type="submit" value="Add Comment" name="addcomment">
+        </form>
+    {% endif %}
+    {% for comment in comments %}
+        <div class="comments" style="width: max-content;">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+            </colgroup>
+            <tr>
+                <td>{{ comment.username }}</td>
+                <td>{{ comment.comment }}</td> 
+                <td class = "created">{{ comment.createtime }}</td>
+            </tr>
+        </table>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,82 @@
+body {
+    padding: 10px;
+    background-color: skyblue;
+}
+
+
+.nav-link{
+    border-width: 1px; 
+    border: solid;
+    border-color: black;
+    margin-right: 10px;
+    color: black;
+    
+}
+
+.nav-link:hover{
+    background-color: hotpink;
+}
+
+.signedinas{
+    margin-bottom: 10px;
+}
+
+.flex-container {
+    display: flex;
+    height: auto;
+}
+
+img{
+    max-height: fit-content;
+    max-width: fit-content;
+
+}
+
+.flex-child {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}  
+
+.flex-child:first-child {
+    margin-right: 20px;
+} 
+
+.comments{
+    border-style: solid; 
+    border-color: black; 
+    border-width: 2px; 
+    margin-top: 10px; 
+    padding-left: 3px;
+    background-color: white;
+}
+
+td{
+    width: 300px;
+}
+
+.created{
+    text-align: right;
+}
+
+.watchlist
+{
+    margin-bottom: 10px;
+}
+
+.Cats{
+    font-size: 28px;
+    text-decoration: none;
+    color: black;
+}
+
+.Cats:hover{
+    color: hotpink;
+    
+}
+
+.Cats:active{
+    text-decoration: none;
+}

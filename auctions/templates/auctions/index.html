@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for listing in listings %}
+    <div class="flex-container" style="border: 1px solid black; text-align: center; margin-top: 20px;">
+        <div class="flex-child text">
+        <a style="color: white; text-decoration: none;" href="listing/{{ listing.id }}"><h5>{{ listing.title }}</h5></a>
+        <h6>Current Bid: ${{ listing.starting_bid }}</h6>
+        <p>Created: {{ listing.createtime }}</p>
+        </div>
+        <div class="flex-child image" style="padding: 20px;">
+        {% if listing.image %}
+            <a href="listing/{{ listing.id }}"><img src="{{ listing.image.url }}"  width="360"></a>
+        {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
