@@ -1,2 +1,2 @@
 # Study-Projects
-Basic development projects (Django, Python, HTML, CSS, Javascript)
+Basic commerce site developed with Python, HTML, and CSS, using Django Framework
