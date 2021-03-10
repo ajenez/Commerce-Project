@@ -8,7 +8,7 @@ from django.db.models import Max
 from .models import User, Listing, ListingForm, Comment, CommentForm, Bid, BidForm, IsActiveForm, Watchlist, WatchListForm
 from commerce import settings
 
-#Defines index page and adds accessible listings varibale to the default route 
+#Defines function index page and adds accessible listings varibale to the default route 
 def index(request):
     listings_unsorted = Listing.objects.filter(isactive=True)
     listings = sorted(listings_unsorted, key=lambda x: x.createtime, reverse=True)
@@ -70,7 +70,7 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
-#Defines listing page and sets up the ability to bid on each listing, add and remove a listing from personal watchlist, and comment
+#Defines function for listing page and sets up the ability to bid on each listing, add and remove a listing from personal watchlist, and comment
 #Also updates current price to highest bid
 
 def listing(request, pk):
@@ -126,7 +126,7 @@ def listing(request, pk):
         overbid = "%.2f" %(float(bid)+.01)
         you=""
     
-# handle post requests 
+# handle post requests (bidding, comments, changing wether a page is active, and watchlist) 
 
     listing_fields = Listing.objects.get(id=pk)
     unsorted_comments = Comment.objects.filter(id_of_listing=pk)
@@ -205,12 +205,14 @@ def listing(request, pk):
     })
 
 
-#These next blocks help set up views for different categories (definitely a better way to set this up)
+#Defines function for categories page which has links to listings grouped by certain categories
+
 def categories(request):
     print(categories)
     return render(request, "auctions/categories.html",{
     })
 
+#The next 8 functions define individual category pages (definitely a better way to do this)
 def beauty(request):
     category = "Beauty"
     listings_unsorted = Listing.objects.filter(category="Beauty", isactive=True)
@@ -278,7 +280,7 @@ def toys(request):
 
 
 
-#Defines the watchlist page allowing it to access a variable with all of the listings that a user has added to their watchlist
+#Defines function for the watchlist page allowing it to access a variable with all of the listings that a user has added to their watchlist
 def watchlist(request):
     listings_unsorted = Watchlist.objects.filter(user_id=request.user)
     print(listings_unsorted)
@@ -295,7 +297,7 @@ def watchlist(request):
         "listings":listings,
     })
 
-#Defines create page where user are able to create a listing includng adding a name, description, starting bid, image and category
+#Defines function for create page where user are able to create a listing includng adding a name, description, starting bid, image and category
 def create(request):
     if request.method == "POST":
             createform = ListingForm(request.POST, request.FILES)
