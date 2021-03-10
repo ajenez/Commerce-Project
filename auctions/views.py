@@ -8,7 +8,7 @@ from django.db.models import Max
 from .models import User, Listing, ListingForm, Comment, CommentForm, Bid, BidForm, IsActiveForm, Watchlist, WatchListForm
 from commerce import settings
 
-
+#Defines index page and adds accessible listings varibale to the default route 
 def index(request):
     listings_unsorted = Listing.objects.filter(isactive=True)
     listings = sorted(listings_unsorted, key=lambda x: x.createtime, reverse=True)
@@ -18,6 +18,7 @@ def index(request):
     })
 
 
+#Allows user to log in user Django's login def
 def login_view(request):
     if request.method == "POST":
 
@@ -37,12 +38,12 @@ def login_view(request):
     else:
         return render(request, "auctions/login.html")
 
-
+#Allows user to log out using Django's log out def
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
-
+#Allows user to register using Django's register def
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -68,6 +69,9 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+#Defines listing page and sets up the ability to bid on each listing, add and remove a listing from personal watchlist, and comment
+#Also updates current price to highest bid
 
 def listing(request, pk):
     #Remove from watchlist and handle anonymous user
@@ -201,6 +205,7 @@ def listing(request, pk):
     })
 
 
+#These next blocks help set up views for different categories (definitely a better way to set this up)
 def categories(request):
     print(categories)
     return render(request, "auctions/categories.html",{
@@ -273,7 +278,7 @@ def toys(request):
 
 
 
-
+#Defines the watchlist page allowing it to access a variable with all of the listings that a user has added to their watchlist
 def watchlist(request):
     listings_unsorted = Watchlist.objects.filter(user_id=request.user)
     print(listings_unsorted)
@@ -290,8 +295,8 @@ def watchlist(request):
         "listings":listings,
     })
 
+#Defines create page where user are able to create a listing includng adding a name, description, starting bid, image and category
 def create(request):
-    print("Here")
     if request.method == "POST":
             createform = ListingForm(request.POST, request.FILES)
             if createform.is_valid():
