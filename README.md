@@ -14,4 +14,4 @@ This was my first time using Django's Modelforms and it was really interesting d
 
 https://github.com/ajenez/Commerce-Project/blob/12a88d48103e716a35460bcd795cb7aeae381f59/auctions/views.py#L301-L313
 
-Video demonstration: https://www.youtube.com/watch?v=W50ChueT1z
+Video demonstration: https://www.youtube.com/watch?v=W50ChueT1zM
